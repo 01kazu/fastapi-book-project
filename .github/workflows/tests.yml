@@ -2,10 +2,7 @@ name: Fast API book project tests
 
 on:
     pull_request:
-        branches:
-            - "main" 
-        paths:
-            - ".github/workflows/test.yaml"
+        branches: [main]
 jobs:
     build:
 
