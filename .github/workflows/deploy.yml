@@ -41,7 +41,7 @@ jobs:
 
             # Navigate to the project directory and deploy
             cd /home/ubuntu/
-            git clone <your-github-repo>
+            git clone https://github.com/01kazu/fastapi-book-project.git
             cd fastapi-book-project/
             git pull
             docker-compose up -d --build
