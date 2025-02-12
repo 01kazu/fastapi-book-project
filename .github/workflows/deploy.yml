@@ -1,0 +1,47 @@
+name: Deploy
+on:
+    push:
+        branches: [main]
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Deploy via SSH
+              uses: appleboy/ssh-action@master
+              with:
+                host: ${{ secrets.SSH_HOST }}
+                username: ${{ secrets.SSH_USERNAME }}
+                key: ${{ secrets.SSH_PRIVATE_KEY }}
+                script: |
+                    # Update package index and install 
+                    sudo apt-get update -y
+                    sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+
+                    # Add Docker's official GPG key
+                    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+                    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+                    # Install Docker
+                    sudo apt-get update -y
+                    sudo apt-get install -y docker-ce docker-ce-cil containerd.io
+
+                    # Add the SSH user to the Docker group
+                    sudo usermod -aG docker ${{ secrets.SSH_USERNAME }}
+
+                    # Install Docker Compose
+                    sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(unmae -m)" -o /usr/local/bin/docker-compose
+                    sudo chmod +x /usr/local/bin/docker-compose
+
+                    # Verify installations
+                    docker --version
+                    docker-compose --version
+
+                    # Navigate to the project directory and deploy
+                    cd /home/ubuntu/
+                    git clone https://github.com/01kazu/fastapi-book-project.git
+                    cd fastapi-book-project/
+                    git pull
+                    docker-compose up -d --build

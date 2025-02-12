@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    container_name: fastapi-book-project
+    ports:
+      - "8000:8000"
+    
+  nginx:
+    image: nginx:latest
+    container_name: fastapi-book-project-nginx
+    volumes:
+      - ./fastapi_nginx.conf:/etc/nginx/conf.d/default.conf
+    ports: 
+      - "80:80"
+    depends_on:
+      - app
