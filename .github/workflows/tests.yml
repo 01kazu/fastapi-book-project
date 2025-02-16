@@ -36,7 +36,7 @@ jobs:
               "username": "GitHub Actions",
               "status": "success",
               "message": "Tests passed successfully for PR ${{ github.event.pull_request.number }}."
-              }' ${{ secrets.SLACK_WEBHOOK_URL }}
+              }' ${{ secrets.TELEX_WEBHOOK_URL }}
                     
         - name: Notify Telex of Test Failure
           if: failure()
@@ -46,6 +46,6 @@ jobs:
               "username": "GitHub Actions",
               "status": "failure",
               "message": "Tests failed for PR ${{ github.event.pull_request.number }}."
-              }' ${{ secrets.SLACK_WEBHOOK_URL}}
+              }' ${{ secrets.TELEX_WEBHOOK_URL}}
                   
 
