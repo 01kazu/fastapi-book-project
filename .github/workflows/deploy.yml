@@ -17,16 +17,6 @@ jobs:
             "status": "in progress",
             "message": "Deployment started for commit ${{ github.sha }}."
           }' ${{ secrets.TELEX_WEBHOOK_URL }}
-                      
-      - name: Notify Telex - Deployment Failed
-        if: failure()
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d '{
-            "event_name": "cd_pipeline_test", 
-            "username": "GitHub Actions",
-            "status": "failure",
-            "message": "Tests failed for PR ${{ github.sha }}."
-          }' ${{ secrets.TELEX_WEBHOOK_URL }}
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
