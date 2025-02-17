@@ -19,7 +19,7 @@ integration_json = {
       "background_color": "#fff"
     },
     "is_active": True,
-    "integration_type": "type"
+    "integration_type": "modifier"
     "key_features": [
       "realtime-updates",
       "click notifications"
