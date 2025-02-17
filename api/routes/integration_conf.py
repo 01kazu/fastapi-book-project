@@ -20,6 +20,7 @@ integration_json = {
     },
     "is_active": True,
     "integration_type": "modifier",
+    "integration_category": "Monitoring & Logging",
     "key_features": [
       "realtime-updates",
       "click notifications"
