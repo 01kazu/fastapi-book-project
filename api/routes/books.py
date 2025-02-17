@@ -71,8 +71,3 @@ async def update_book(book_id: int, book: Book) -> Book:
 async def delete_book(book_id: int) -> None:
     db.delete_book(book_id)
     return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content=None)
-
-
-@router.get("/telex-webhook", status_code=status.HTTP_200_OK)
-async def telex_webhook() -> None:
-    return JSONResponse(status_code=status.HTTP_200, content={'response': {'detail': 'It works'}})
