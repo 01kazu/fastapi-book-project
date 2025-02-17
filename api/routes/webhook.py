@@ -7,7 +7,7 @@ router = APIRouter()
 
 logging.basicConfig(level=logging.INFO)
 
-@router.post("/telex-webhook")
+@router.post("/telexwebhook")
 async def telex_to_slack(request: Request):
     try:
         payload = await request.json()
