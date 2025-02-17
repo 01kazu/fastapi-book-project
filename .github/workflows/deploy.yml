@@ -10,7 +10,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Notify Telex - Deployment Started
-        if: success()
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{
             "event_name": "cd_pipeline_test", 
